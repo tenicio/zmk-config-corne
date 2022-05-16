@@ -15,39 +15,49 @@
         compatible = "zmk,conditional-layers";
         tri_layer {
             if-layers = <1 2>;
-            then-layer = <3>;
+            then-layer = <4>;
         };
     };
 };
 
 / {
+    behaviors {
+        td0: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_0";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo 2>, <&mo 3>;
+        };
+    };
+
         keymap {
                 compatible = "zmk,keymap";
 
                 default_layer {
 // -----------------------------------------------------------------------------------------
-// | ESC  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-// | TAB  |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | CTRL |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | SHFT |
-//                    | GUI | LWR | ENT |   | SPC | RSE  | ALT |
+// | ESC  |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I   |  O  |  P  | BKSP |
+// | TAB  |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K   |  L  |  ;  |  '   |
+// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,   |  .  |  /  | GUI  |
+//                    | ALT | LWR | ENT |   | SPC | RSE | CTRL |
                         bindings = <
-   &kp ESC   &kp Q &kp W &kp E    &kp R &kp T     &kp Y     &kp U &kp I     &kp O   &kp P    &kp BSPC
-   &kp TAB   &kp A &kp S &kp D    &kp F &kp G     &kp H     &kp J &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LCTRL &kp Z &kp X &kp C    &kp V &kp B     &kp N     &kp M &kp COMMA &kp DOT &kp FSLH &kp RSHFT
-                         &kp LGUI &mo 1 &kp RET   &kp SPACE &mo 2 &kp RALT
+   &kp ESC   &kp Q &kp W &kp E    &kp R &kp T    &kp Y     &kp U &kp I     &kp O   &kp P    &kp BSPC
+   &kp TAB   &kp A &kp S &kp D    &kp F &kp G    &kp H     &kp J &kp K     &kp L   &kp SEMI &kp SQT
+   &kp LSHFT &kp Z &kp X &kp C    &kp V &kp B    &kp N     &kp M &kp COMMA &kp DOT &kp FSLH &kp LGUI
+                         &kp LALT &mo 1 &kp RET  &kp SPACE &td0  &kp RCTRL
                         >;
                 };
                 lower_layer {
 // -----------------------------------------------------------------------------------------
 // |  `   |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | DEL  |
-// |      |     |     |     |     |     |   |     | LFT | DWN |  UP | RGT |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+// |      | F1  | F2  | F3  | F4  | F5  |   | F6  |  4  |  5  |  6  |  +  |  -   |
+// | SHFT | F7  | F8  | F9  | F10 | F11 |   | F12 |  1  |  2  |  3  |  *  |  /   |
 //                    |     |     |     |   |     |     |     |
                         bindings = <
-   &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7   &kp N8   &kp N9 &kp N0    &kp DEL
-   &trans    &trans &trans &trans &trans &trans &trans &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans
-   &kp LSHFT &trans &trans &trans &trans &trans &trans &trans
-                           &trans &trans &trans &trans &trans   &trans
+   &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4  &kp N5  &kp N6  &kp N7 &kp N8    &kp N9 &kp N0          &kp DEL
+   &trans    &kp F1 &kp F2 &kp F3 &kp F4  &kp F5  &kp F6  &kp N4 &kp N5    &kp N6 &kp PLUS        &kp MINUS
+   &kp LSHFT &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &kp N1 &kp N2    &kp N3 &kp KP_MULTIPLY &kp FSLH
+                           &trans &trans &trans &trans &trans &trans
                         >;
                 };
 
@@ -58,10 +68,24 @@
 // | SHFT |     |     |     |     |     |   |  _  |  +  |  [  |  ]  |  \  |  ~   | // TODO: Fix this row when &mkp is committed
 //                    |     |     |     |   |     |     |     |
                         bindings = <
-   &trans    &kp EXCL &kp AT  &kp HASH &kp DLLR  &kp PRCNT &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp DEL
-   &kp LCTRL &trans   &trans  &trans   &trans    &trans    &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp PIPE &trans
-   &kp LSHFT &trans   &trans  &trans   &trans    &trans    &trans    &trans    &trans          &trans   &kp BSLH &kp TILDE
-                              &trans   &trans    &trans    &trans    &trans    &trans
+   &trans    &kp EXCL &kp AT  &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp DEL
+   &kp LCTRL &trans   &trans  &trans   &trans   &trans    &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp PIPE &trans
+   &kp LSHFT &trans   &trans  &trans   &trans   &trans    &trans    &trans    &trans          &trans   &kp BSLH &kp TILDE
+                              &trans   &trans   &trans    &trans    &trans    &trans
+                        >;
+                };
+
+                nav_layer {
+// -----------------------------------------------------------------------------------------
+// |      |     |     |     |     |     |   |     |     |     |     |     |      |
+// |      |     |     |     |     |     |   |     | LFT | DWN |  UP | RGT |      |
+// |      |     |     |     |     |     |   |     |     |     |     |     |      |
+//                    |     |     |     |   |     |     |     |
+                        bindings = <
+   &trans &trans &trans &trans &trans &trans &trans &trans   &trans   &trans &trans
+   &trans &trans &trans &trans &trans &trans &trans &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans
+   &trans &trans &trans &trans &trans &trans &trans &trans
+                        &trans &trans &trans &trans &trans   &trans
                         >;
                 };
 
