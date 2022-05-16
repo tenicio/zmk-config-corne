@@ -11,6 +11,16 @@
 #include <dt-bindings/zmk/outputs.h>
 
 / {
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+};
+
+/ {
         keymap {
                 compatible = "zmk,keymap";
 
@@ -30,28 +40,43 @@
                 lower_layer {
 // -----------------------------------------------------------------------------------------
 // |  `   |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | DEL  |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   |     | LFT | DWN |  UP | RGT | RGBT |
-// | SHFT | OTG | BLE | USB |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | ENT |   | SPC |     | ALT |
+// |      |     |     |     |     |     |   |     | LFT | DWN |  UP | RGT |      |
+// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+//                    |     |     |     |   |     |     |     |
                         bindings = <
-   &kp GRAVE  &kp N1       &kp N2       &kp N3       &kp N4       &kp N5        &kp N6  &kp N7   &kp N8   &kp N9  &kp N0    &kp DEL
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4  &trans  &kp LEFT &kp DOWN &kp UP  &kp RIGHT &rgb_ug RGB_TOG
-   &kp LSHFT  &out OUT_TOG &out OUT_BLE &out OUT_USB &trans       &trans        &trans  &trans   &trans   &trans  &trans
-                                        &kp LGUI     &trans       &trans        &trans  &trans   &kp RALT
+   &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7   &kp N8   &kp N9 &kp N0    &kp DEL
+   &trans    &trans &trans &trans &trans &trans &trans &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans
+   &kp LSHFT &trans &trans &trans &trans &trans &trans &trans
+                           &trans &trans &trans &trans &trans   &trans
                         >;
                 };
 
                 raise_layer {
 // -----------------------------------------------------------------------------------------
-// |  ESC |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | DEL  |
+// |      |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | DEL  |
 // | CTRL |     |     |     |     |     |   |  -  |  =  |  {  |  }  | "|" |      |
 // | SHFT |     |     |     |     |     |   |  _  |  +  |  [  |  ]  |  \  |  ~   | // TODO: Fix this row when &mkp is committed
-//                    | GUI |     | ENT |   | SPC |     | ALT |
+//                    |     |     |     |   |     |     |     |
                         bindings = <
-   &kp  ESC  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp DEL
-   &kp LCTRL &trans    &trans  &trans    &trans    &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp PIPE &trans
-   &kp LSHFT &trans    &trans  &trans    &trans    &trans      &trans    &trans    &trans          &trans   &kp BSLH &kp TILDE
-                               &kp LGUI  &trans    &trans      &trans    &trans    &kp RALT
+   &trans    &kp EXCL &kp AT  &kp HASH &kp DLLR  &kp PRCNT &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp DEL
+   &kp LCTRL &trans   &trans  &trans   &trans    &trans    &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp PIPE &trans
+   &kp LSHFT &trans   &trans  &trans   &trans    &trans    &trans    &trans    &trans          &trans   &kp BSLH &kp TILDE
+                              &trans   &trans    &trans    &trans    &trans    &trans
+                        >;
+                };
+        };
+
+                adjust_layer {
+// -----------------------------------------------------------------------------------------
+// |     |     |     |     |     |     |   |     |     |     |     |     |BTCLR |
+// |     | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |RGBT  |
+// |     | OTG | BLE | USB |     |     |   |     |     |     |     |     |      |
+//                   |     |     |     |   |     |     |     |
+                        bindings = <
+   &trans &trans       &trans       &trans       &trans       &trans       &trans &trans &trans &trans &trans &bt BT_CLR
+   &trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans &trans &trans &trans &trans &rgb_ug RGB_TOG
+   &trans &out OUT_TOG &out OUT_BLE &out OUT_USB &trans       &trans       &trans &trans &trans &trans &trans &trans
+                                    &trans       &trans       &trans       &trans &trans &trans
                         >;
                 };
         };
