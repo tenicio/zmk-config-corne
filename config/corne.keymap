@@ -51,7 +51,7 @@
       //                    | ALT | LWR | ENT |   | SPC | RSE | CTRL |
       bindings = <
         &kp ESC   &kp Q       &kp W      &kp E      &kp R          &kp T     &kp Y  &kp U       &kp I      &kp O      &kp P         &kp BSPC
-        &kp TAB   &hm LCTRL A &hm LGUI S &hm LALT D &hm LSHFT F    &hp G     &kp H  &hm RSHFT J &hm RALT K &hm RGUI L &hm RCTL SEMI &kp SQT
+        &kp TAB   &hm LCTRL A &hm LGUI S &hm LALT D &hm LSHFT F    &kp G     &kp H  &hm RSHFT J &hm RALT K &hm RGUI L &hm RCTL SEMI &kp SQT
         &kp LSHFT &kp Z       &kp X      &kp C      &kp V          &kp B     &kp N  &kp M       &kp COMMA  &kp DOT    &kp FSLH      &kp LGUI
                               &kp LALT   &mo 1      &kp RET        &kp SPACE &td0   &kp RCTRL
       >;
