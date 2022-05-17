@@ -75,7 +75,7 @@
       //                    |     |     |     |   |     |     |     |
       bindings = <
         &trans    &trans &trans  &trans &trans &trans           &trans          &mt LBKT LBRC &kp RBKT RBRC &kp LPAR  &kp RPAR  &kp DEL
-        &trans    &trans &trans  &trans &trans &mt BLSH PIPE    &mt MINUS UNDER &kp LEFT      &kp DOWN      &kp UP    &kp RIGHT &trans
+        &trans    &trans &trans  &trans &trans &mt BSLH PIPE    &mt MINUS UNDER &kp LEFT      &kp DOWN      &kp UP    &kp RIGHT &trans
         &kp LCTRL &trans &trans  &trans &trans &trans           &mt EQUAL PLUS  &kp HOME      &kp PG_DN     &kp PG_UP &kp END   &trans
                                  &trans &trans &trans           &trans          &trans        &trans
       >;
