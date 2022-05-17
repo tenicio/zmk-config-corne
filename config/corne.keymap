@@ -10,6 +10,8 @@
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/outputs.h>
 
+#define AS(keycode) &as LS(keycode) keycode
+
 / {
   conditional_layers {
     compatible = "zmk,conditional-layers";
@@ -22,6 +24,16 @@
 
 / {
   behaviors {
+    as: auto_shift {
+      compatible = "zmk,behavior-hold-tap";
+      label = "AUTO_SHIFT";
+      #binding-cells = <2>;
+      tapping_term_ms = <175>;
+      quick_tap_ms = <0>;
+      flavor = "tap-preferred";
+      bindings = <&kp>, <&kp>;
+    };
+
     hm: homerow_mods {
       compatible = "zmk,behavior-hold-tap";
       label = "HOMEROW_MODS";
@@ -67,33 +79,33 @@
       >;
     };
 
-    // lower_layer {
-    //   // -----------------------------------------------------------------------------------------
-    //   // |      |     |     |     |     |     |   | *EM*| [{  | ]}  |  (  |  )  | DEL  |
-    //   // |      |     |     |     |     |  \| |   | -_  | LFT | DWN |  UP | RGT |      |
-    //   // | CTRL |     |     |     |     |     |   |  =+ |HOME |PGDN |PGUP | END |      | // TODO: Fix this row when &mkp is committed
-    //   //                    |     |     |     |   |     |     |     |
-    //   bindings = <
-    //     &trans    &trans &trans  &trans &trans &trans           &trans          &mt LBKT LBRC &kp RBKT RBRC &kp LPAR  &kp RPAR  &kp DEL
-    //     &trans    &trans &trans  &trans &trans &mt BSLH PIPE    &mt MINUS UNDER &kp LEFT      &kp DOWN      &kp UP    &kp RIGHT &trans
-    //     &kp LCTRL &trans &trans  &trans &trans &trans           &mt EQUAL PLUS  &kp HOME      &kp PG_DN     &kp PG_UP &kp END   &trans
-    //                              &trans &trans &trans           &trans          &trans        &trans
-    //   >;
-    // };
+    lower_layer {
+      // -----------------------------------------------------------------------------------------
+      // |      |     |     |     |     |     |   | *EM*| [{  | ]}  |  (  |  )  | DEL  |
+      // |      |     |     |     |     |  \| |   | -_  | LFT | DWN |  UP | RGT |      |
+      // | CTRL |     |     |     |     |     |   | =+  |HOME |PGDN |PGUP | END |      | // TODO: Fix this row when &mkp is committed
+      //                    |     |     |     |   |     |     |     |
+      bindings = <
+        &trans    &trans &trans  &trans &trans &trans           &trans    AS(LBKT) AS(RBKT)  &kp LPAR  &kp RPAR  &kp DEL
+        &trans    &trans &trans  &trans &trans &as BSLH PIPE    AS(MINUS) &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &trans
+        &kp LCTRL &trans &trans  &trans &trans &trans           AS(EQUAL) &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans
+                                 &trans &trans &trans           &trans    &trans   &trans
+      >;
+    };
 
-    // raise_layer {
-    //   // -----------------------------------------------------------------------------------------
-    //   // |  `   |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |      |
-    //   // |      | F1  | F2  | F3  | F4  | F5  |   | F6  |  4  |  5  |  6  |  +  |  -   |
-    //   // | CTRL | F7  | F8  | F9  | F10 | F11 |   | F12 |  1  |  2  |  3  |  *  |  /   |
-    //   //                    |     |     |     |   |     |     |     |
-    //   bindings = <
-    //     &mt GRAVE TILDE &mt N1 EXCL &mt N2 AT &mt N3 HASH &mt N4 DLLR &mt N5 PRCNT    &mt N6 CARET &mt N7 AMPS &mt N8 KP_MULTIPLY &mt N9 LPAR  &mt N0 RPAR     &trans
-    //     &trans          &kp F1      &kp F2    &kp F3      &kp F4      &kp F5          &kp F6       &mt N4 DLLR &mt N5 PRCNT       &mt N6 CARET &kp PLUS        &kp MINUS
-    //     &kp LCTRL       &kp F7      &kp F8    &kp F9      &kp F10     &kp F11         &kp F12      &mt N1 EXCL &mt N2 AT          &mt N3 HASH  &kp KP_MULTIPLY &kp FSLH
-    //                                           &trans      &trans      &trans          &trans       &trans      &trans
-    //   >;
-    // };
+    raise_layer {
+      // -----------------------------------------------------------------------------------------
+      // |  `   |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |      |
+      // |      | F1  | F2  | F3  | F4  | F5  |   | F6  |  4  |  5  |  6  |  +  |  -   |
+      // | CTRL | F7  | F8  | F9  | F10 | F11 |   | F12 |  1  |  2  |  3  |  *  |  /   |
+      //                    |     |     |     |   |     |     |     |
+      bindings = <
+        AS(GRAVE) AS(N1) AS(N2) AS(N3) AS(N4)  AS(N5)    AS(N6)  AS(N7) AS(N8) AS(N9) AS(N0)          &trans
+        &trans    &kp F1 &kp F2 &kp F3 &kp F4  &kp F5    &kp F6  AS(N4) AS(N5) AS(N6) &kp PLUS        &kp MINUS
+        &kp LCTRL &kp F7 &kp F8 &kp F9 &kp F10 &kp F11   &kp F12 AS(N1) AS(N2) AS(N3) &kp KP_MULTIPLY &kp FSLH
+                                &trans &trans  &trans    &trans  &trans &trans
+      >;
+    };
 
     nav_layer {
       // -----------------------------------------------------------------------------------------
