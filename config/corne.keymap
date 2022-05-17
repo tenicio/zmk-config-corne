@@ -41,6 +41,10 @@
     };
   };
 
+  &mt {
+      tapping-term-ms = <175>;
+  };
+
   keymap {
     compatible = "zmk,keymap";
 
@@ -51,24 +55,24 @@
       // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,   |  .  |  /  | GUI  |
       //                    | ALT | LWR | ENT |   | SPC | RSE | CTRL |
       bindings = <
-        &kp ESC   &kp Q       &kp W      &kp E      &kp R          &kp T     &kp Y  &kp U       &kp I      &kp O      &kp P         &kp BSPC
-        &kp TAB   &hm LCTRL A &hm LGUI S &hm LALT D &hm LSHFT F    &kp G     &kp H  &hm RSHFT J &hm RALT K &hm RGUI L &hm RCTL SEMI &kp SQT
-        &kp LSHFT &kp Z       &kp X      &kp C      &kp V          &kp B     &kp N  &kp M       &kp COMMA  &kp DOT    &kp FSLH      &kp LGUI
-                              &kp LALT   &mo 1      &kp RET        &kp SPACE &td0   &kp RCTRL
+        &kp ESC   &kp Q       &kp W      &kp E      &kp R          &kp T     &kp Y &kp U       &kp I      &kp O      &kp P         &kp BSPC
+        &kp TAB   &hm LCTRL A &hm LGUI S &hm LALT D &hm LSHFT F    &kp G     &kp H &hm RSHFT J &hm RALT K &hm RGUI L &hm RCTL SEMI &kp SQT
+        &kp LSHFT &kp Z       &kp X      &kp C      &kp V          &kp B     &kp N &kp M       &kp COMMA  &kp DOT    &kp FSLH      &kp LGUI
+                              &kp LALT   &mo 1      &kp RET        &kp SPACE &td0  &kp RCTRL
       >;
     };
 
     lower_layer {
       // -----------------------------------------------------------------------------------------
-      // |      |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | DEL  |
-      // |      |     |     |     |     |     |   |  -  |  =  |  {  |  }  | "|" |      |
-      // | CTRL |     |     |     |     |     |   |  _  |  +  |  [  |  ]  |  \  |  ~   | // TODO: Fix this row when &mkp is committed
+      // |      |     |     |     |     |     |   | *EM*| [{  | ]}  |  (  |  )  | DEL  |
+      // |      |     |     |     |     |  \| |   | -_  | LFT | DWN |  UP | RGT |      |
+      // | CTRL |     |     |     |     |     |   |  =+ |HOME |PGDN |PGUP | END |      | // TODO: Fix this row when &mkp is committed
       //                    |     |     |     |   |     |     |     |
       bindings = <
-        &trans    &kp EXCL &kp AT  &kp HASH &kp DLLR &kp PRCNT    &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp DEL
-        &trans    &trans   &trans  &trans   &trans   &trans       &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp PIPE &trans
-        &kp LCTRL &trans   &trans  &trans   &trans   &trans       &trans    &trans    &trans          &trans   &kp BSLH &kp TILDE
-                                   &trans   &trans   &trans       &trans    &trans    &trans
+        &trans    &trans &trans  &trans &trans &trans           &kp dash        &mt LBKT LBRC &kp RBKT RBRC &kp LPAR  &kp RPAR  &kp DEL
+        &trans    &trans &trans  &trans &trans &mt BLSH PIPE    &mt MINUS UNDER &kp LEFT      &kp DOWN      &kp UP    &kp RIGHT &trans
+        &kp LCTRL &trans &trans  &trans &trans &trans           &mt EQUAL PLUS  &kp HOME      &kp PG_DN     &kp PG_UP &kp END   &trans
+                                 &trans &trans &trans           &trans          &trans        &trans
       >;
     };
 
@@ -79,10 +83,10 @@
       // | CTRL | F7  | F8  | F9  | F10 | F11 |   | F12 |  1  |  2  |  3  |  *  |  /   |
       //                    |     |     |     |   |     |     |     |
       bindings = <
-        &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4  &kp N5     &kp N6  &kp N7 &kp N8 &kp N9 &kp N0          &trans
-        &trans    &kp F1 &kp F2 &kp F3 &kp F4  &kp F5     &kp F6  &kp N4 &kp N5 &kp N6 &kp PLUS        &kp MINUS
-        &kp LCTRL &kp F7 &kp F8 &kp F9 &kp F10 &kp F11    &kp F12 &kp N1 &kp N2 &kp N3 &kp KP_MULTIPLY &kp FSLH
-                                &trans &trans  &trans     &trans  &trans &trans
+        &mt GRAVE TILDE &mt N1 EXCL &mt N2 AT &mt N3 HASH &mt N4 DLLR &mt N5 PRCNT    &mt N6 CARET &mt N7 AMPS &mt N8 KP_MULTIPLY &mt N9 LPAR  &mt N0 RPAR     &trans
+        &trans          &kp F1      &kp F2    &kp F3      &kp F4      &kp F5          &kp F6       &mt N4 DLLR &mt N5 PRCNT       &mt N6 CARET &kp PLUS        &kp MINUS
+        &kp LCTRL       &kp F7      &kp F8    &kp F9      &kp F10     &kp F11         &kp F12      &mt N1 EXCL &mt N2 AT          &mt N3 HASH  &kp KP_MULTIPLY &kp FSLH
+                                              &trans      &trans      &trans          &trans       &trans      &trans
       >;
     };
 
