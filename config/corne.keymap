@@ -65,7 +65,7 @@
       // | CTRL |     |     |     |     |     |   |  =+ |HOME |PGDN |PGUP | END |      | // TODO: Fix this row when &mkp is committed
       //                    |     |     |     |   |     |     |     |
       bindings = <
-        &trans    &trans &trans  &trans &trans &trans           &kp dash        &mt LBKT LBRC &kp RBKT RBRC &kp LPAR  &kp RPAR  &kp DEL
+        &trans    &trans &trans  &trans &trans &trans           &trans          &mt LBKT LBRC &kp RBKT RBRC &kp LPAR  &kp RPAR  &kp DEL
         &trans    &trans &trans  &trans &trans &mt BLSH PIPE    &mt MINUS UNDER &kp LEFT      &kp DOWN      &kp UP    &kp RIGHT &trans
         &kp LCTRL &trans &trans  &trans &trans &trans           &mt EQUAL PLUS  &kp HOME      &kp PG_DN     &kp PG_UP &kp END   &trans
                                  &trans &trans &trans           &trans          &trans        &trans
