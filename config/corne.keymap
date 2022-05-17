@@ -86,10 +86,10 @@
       // | CTRL |     |     |     |     |     |   | =+  |HOME |PGDN |PGUP | END |      | // TODO: Fix this row when &mkp is committed
       //                    |     |     |     |   |     |     |     |
       bindings = <
-        &trans    &trans &trans  &trans &trans &trans           &trans    AS(LBKT) AS(RBKT)  &kp LPAR  &kp RPAR  &kp DEL
-        &trans    &trans &trans  &trans &trans &as BSLH PIPE    AS(MINUS) &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &trans
-        &kp LCTRL &trans &trans  &trans &trans &trans           AS(EQUAL) &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans
-                                 &trans &trans &trans           &trans    &trans   &trans
+        &trans    &trans &trans  &trans &trans &trans      &trans    AS(LBKT) AS(RBKT)  &kp LPAR  &kp RPAR  &kp DEL
+        &trans    &trans &trans  &trans &trans AS(BSLH)    AS(MINUS) &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &trans
+        &kp LCTRL &trans &trans  &trans &trans &trans      AS(EQUAL) &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans
+                                 &trans &trans &trans      &trans    &trans   &trans
       >;
     };
 
